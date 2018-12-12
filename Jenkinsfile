@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     checkout scm
-                    def mvnHome = tool 'maven-3'
+                    def mvnHome = tool 'maven'
                 }
             }
         }
@@ -14,10 +14,9 @@ pipeline {
         stage('Build Customer app code') {
             steps {
                 script {
-                    env.JAVA = "${tool 'JAVA_1.8'}"
-                    env.JAVA_HOME = "${env.JAVA}/jdk1.8.0_141"
+                   
                     checkout scm
-                    def mvnHome = tool 'maven-3'
+                    def mvnHome = tool 'maven'
                     try {
                         sh "${mvnHome}/apache-maven-3.5.0/bin/mvn clean install -U -Dmaven.test.skip=true"
                         currentBuild.result = 'SUCCESS'
@@ -25,7 +24,7 @@ pipeline {
                         currentBuild.result = 'FAILURE'
                         sh "exit 1"
                     }
-                    echo "RESULT: ${currentBuild.result}"
+                    
                 }
             }
        }
