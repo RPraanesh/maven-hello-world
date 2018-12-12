@@ -18,7 +18,7 @@ pipeline {
                     checkout scm
                     def mvnHome = tool 'maven'
                     try {
-                        sh "${mvnHome}/apache-maven-3.5.0/bin/mvn clean install -U -Dmaven.test.skip=true"
+                        sh "${mvnHome}/my-app/mvn clean install -U -Dmaven.test.skip=true"
                         currentBuild.result = 'SUCCESS'
                     } catch (Exception err) {
                         currentBuild.result = 'FAILURE'
